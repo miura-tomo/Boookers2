@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-  get 'users/show'
   # get 'books/show'
   # get 'books/index'
   # # get 'users/index'
@@ -13,9 +12,10 @@ Rails.application.routes.draw do
 
   resources :users, only:[:index, :show, :edit, :update]
   resources :books
-  get "about" => "home#about"
+
+  get 'home/about' => 'home#about'
 
   # / へのルーティング
-  root 'home#index'
+  root "home#top"
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

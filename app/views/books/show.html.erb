@@ -1,19 +1,38 @@
-<% if flash[:notice] %>
-<div class="flash">
-	<%= flash[:notice] %>
-		
-	</div>
-	<% end %>
+<% if @book_new.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= @book_new.errors.count %>errors prohibited this obj from being saved:</h2>
+      <ul>
+      <% @book_new.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
 
+  <%= render 'users/list', user: @user, book: @book_new %>
 
-<h2>本のタイトル</h2>
-<p><%= @book.title %></p>
-<h2>本の内容</h2>
-<p><%= @book.body %></p>
+<div class='col-xs-9'>
+<h2>Book detail</h2>
+<table class='table'>
+  <tr>
+<td>
+<%= attachment_image_tag(@book.user, :profile_image, :fill, 60, 60, format: 'jpeg', class: "img-circle pull-left profile-img", fallback: "no_image.jpg") %>
+<%= link_to @book.user.name, user_path(@book.user) %><br>
+</td>
+ <td><%= link_to '' do %>
+   <%= @book.title %></td>
+ <% end %>
+<td><%= @book.body %></td>
 
-<p class="single-text">
-    <%= @book.body %>
-</p>
-<!-- 編集部分 -->
-<%= link_to "edit", edit_book_path(@book) %> |
-<%= link_to "back", books_path %>
+    <% if @book.user.id == current_user.id %>
+    <td><%= link_to 'Edit', edit_book_path(@book), class:"btn-sm btn-success" %></td>
+
+    <td><%= link_to 'Destroy', book_path(@book), method: :delete, "data-confirm" => "Are you sure?", class:"btn-sm btn-danger" %></td>
+    <% end %>
+    </tr>
+</table>
+
+  </div>
+</div>
+</div>
+</div>
