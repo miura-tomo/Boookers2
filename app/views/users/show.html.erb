@@ -9,11 +9,49 @@
     </div>
   <% end %>
 
-  <%= render 'users/list', user: @user, book: @book_new %>
+<!--部分テンプレート-->
+<div class="col-xs-3">
+   <h2>User info</h2>
+    <table class="table">
+    <tr><%= attachment_image_tag @user, :profile_image, :fill, 60, 60, fallback: "no_image.jpg" %></tr>
+  <tr>
+  <th>name <%= @user.name %></th>
+</tr>
+<tr>
+<th>Introduction <%= @user.introduction %></th>
+</tr>
+</table>
+
+<div class="row">
+  <% if @user.id == current_user.id %>
+        <%= link_to "", edit_user_path(@user), class: "col-xs-12 btn btn-default glyphicon glyphicon-wrench" %>
+    <% end %>
+</div>
+
+<h2>New book</h2>
+
+<%= form_for(@book_new) do |f| %>
+<div class="field row">
+  <label>Title</label>
+  <%= f.text_field :title, class:"col-xs-12 book_title" %>
+</div>
+
+<div class="field row">
+  <label>Opinion</label>
+  <%= f.text_area :body, class:"col-xs-12 book_body" %>
+</div>
+
+<div class="actions row">
+  <%= f.submit "Create Book", class:"btn btn-primary col-xs-12" %>
+</div>
+<% end %>
+
+</div>
+<!-- ここまで -->
+
 
 <div class="col-xs-9">
   <h2>Books</h2>
-
   <table class="table table-hover table-inverse">
     <thead>
       <tr>
@@ -28,17 +66,20 @@
       <tr>
 
 <% @books.each do |book| %>
-  <td><%= link_to(book.user) do %>
-   <%= attachment_image_tag(book.user, :profile_image, :fill, 60, 60, format: 'jpeg', class: "img-circle pull-left profile-img", fallback: "no_image.jpg") %></td>
-  <% end %>
+  <td><%= link_to(user_path(@user.id)) do %>
+   <%= attachment_image_tag(book.user, :profile_image, :fill, 60, 60, format: 'jpeg', class: "img-circle pull-left profile-img", fallback: "no_image.jpg") %>
+   <% end %>
 
-  <td><%= link_to(book) do %>
+   </td>
+
+  <td><%= link_to(book_path(book.id)) do %>
     <%= book.title %></th>
   <% end %>
   <td><%= book.body %></td>
+<% end %>
+
 </tr>
 
-<% end %>
 <tbody>
 </tbody>
 </table>

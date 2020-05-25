@@ -14,15 +14,14 @@ before_action :authenticate_user!, only: [:show, :index, :create, :edit, :update
     @user = current_user
   end
 
+
   def create
     @book_new = Book.new(book_params)
     @book_new.user_id = current_user.id
     if @book_new.save
     flash[:success] = 'successfully'
-    redirect_to book_path(@book_new)
+    redirect_to book_path(@book_new.id)
   else
-    @books = Book.all
-    @user = current_user
     render "index"
   end
 end
@@ -56,6 +55,6 @@ end
 
 private
 def book_params
-  params.require(:book).permit(:title, :body, :user_id)
+  params.require(:book).permit(:title, :body)
 end
 end
