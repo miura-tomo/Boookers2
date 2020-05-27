@@ -32,17 +32,17 @@
 
 <%= form_for(@book_new) do |f| %>
 <div class="field row">
-	<label>Title</label>
-	<%= f.text_field :title, class:"col-xs-12 book_title" %>
+  <label>Title</label>
+  <%= f.text_field :title, class:"col-xs-12 book_title" %>
 </div>
 
 <div class="field row">
-	<label>Opinion</label>
-	<%= f.text_area :body, class:"col-xs-12 book_body" %>
+  <label>Opinion</label>
+  <%= f.text_area :body, class:"col-xs-12 book_body" %>
 </div>
 
 <div class="actions row">
-	<%= f.submit "Create Book", class:"btn btn-primary col-xs-12" %>
+  <%= f.submit "Create Book", class:"btn btn-primary col-xs-12" %>
 </div>
 <% end %>
 
