@@ -7,6 +7,6 @@ resources :users, only: [:show, :edit, :update, :index,]
 resources :books
 
 
-get 'homes/about' => 'homes#about'
+get 'home/about' => 'homes#about'
 
 end
