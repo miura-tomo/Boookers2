@@ -9,4 +9,9 @@ resources :books
 
 get 'home/about' => 'homes#about'
 
+resources :books do
+  	resource :favorites, only: [:create, :destroy]
+  end
+
 end
+
