@@ -84,7 +84,7 @@
 <!-- ここまで -->
 
 <!-- コメント機能の実装 -->
-<td><%= @book.book_comments.count %></td>件コメント
+<td><%= @book.book_comments.count %></td>
           <% if @book.user == current_user %>
             <td class="edit-btn"><%= link_to "Edit", edit_book_path(@book.id), class: "pull-right" %></td>
           <% end %>
